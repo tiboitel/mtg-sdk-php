@@ -42,7 +42,7 @@ namespace mtgsdk;
  * @property-read $rulings
  * @property-read $foreignNames
  */
-class Card
+class Card implements \JsonSerializable
 {
     use DataBag, QueriesAll, QueriesWithConditions, QueriesOne;
 

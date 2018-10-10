@@ -2,7 +2,7 @@
 
 namespace mtgsdk;
 
-class Supertype
+class Supertype implements \JsonSerializable
 {
     use DataBag, QueriesAllAsArray;
 

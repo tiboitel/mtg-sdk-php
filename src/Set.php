@@ -18,7 +18,7 @@ namespace mtgsdk;
  * @property-red $onlineOnly
  * @method static Set|null find(string $id)
  */
-class Set
+class Set implements \JsonSerializable
 {
     use DataBag, QueriesAll, QueriesWithConditions, QueriesOne;
 

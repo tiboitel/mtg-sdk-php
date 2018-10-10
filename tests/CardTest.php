@@ -56,12 +56,30 @@ class CardTest extends TestCase
         $this->assertEquals('1c4aab072d52d283e902f2302afa255b39e0794b', $card->id);
     }
 
+    public function test_json_serialize()
+    {
+        VCR::insertCassette('lodestone_myr.yaml');
+        
+        $card = Card::find(46128);
+        $json = json_encode($card);
+        $card = json_decode($json);
+        $this->assertEquals('Lodestone Myr', $card->name);
+        $this->assertEquals('{4}', $card->manaCost);
+        $this->assertEquals(4, $card->cmc);
+        $this->assertEquals('Artifact Creature — Myr', $card->type);
+        $this->assertContains('Artifact', $card->types);
+        $this->assertContains('Myr', $card->subtypes);
+        $this->assertEquals('Rare', $card->rarity);
+        $this->assertEquals('MRD', $card->set);
+        $this->assertEquals(46128, $card->multiverseid);
+    }
+
     public function test_all_with_params_return_cards()
     {
         VCR::insertCassette('legendary_elf_warriors.yaml');
 
         $cards = Card::where(['supertypes' => 'legendary'])->where(['subtypes' => 'elf,warrior'])->all();
-        $this->assertCount(18, $cards);
+        $this->assertCount(21, $cards);
     }
 
     public function test_all_with_page_returns_cards()
